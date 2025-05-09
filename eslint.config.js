@@ -1,6 +1,6 @@
 import eslint from '@eslint/js'
 import pluginQuery from '@tanstack/eslint-plugin-query'
-import { defineConfig } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import checkFile from 'eslint-plugin-check-file'
 import pluginImport from 'eslint-plugin-import'
 // eslint-plugin-prettier and eslint-config-prettier 둘 다 설정함
@@ -137,6 +137,7 @@ export default defineConfig([
     plugins: {
       'check-file': checkFile,
     },
+    files: ['!./src/routes/__root.tsx'],
     rules: {
       // 파일 이름 규칙
       'check-file/filename-naming-convention': [
@@ -151,4 +152,5 @@ export default defineConfig([
     },
   },
   eslintPluginPrettierRecommended,
+  globalIgnores(['src/routeTree.gen.ts']),
 ])
