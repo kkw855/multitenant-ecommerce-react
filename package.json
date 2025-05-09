@@ -10,6 +10,8 @@
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@tanstack/eslint-plugin-query": "^5.74.7",
+    "@tanstack/react-router-devtools": "^1.120.3",
+    "@tanstack/router-plugin": "^1.120.3",
     "@types/bun": "latest",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/react": "^19.1.3",
