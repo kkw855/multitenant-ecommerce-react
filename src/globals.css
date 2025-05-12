@@ -40,6 +40,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: "DM Sans", sans-serif;
+  --font-poppins: "Poppins", sans-serif
 }
 
 :root {

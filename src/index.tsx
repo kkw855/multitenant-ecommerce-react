@@ -1,22 +1,31 @@
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+import { routeTree } from '@/routeTree.gen.ts'
+
 import '@/globals.css'
-import { Button } from '@/components/ui/button.tsx'
+
+// Set up a Router instance
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+})
+
+// Register things for typesafety
+declare module '@tanstack/react-router' {
+  // noinspection JSUnusedGlobalSymbols
+  interface Register {
+    router: typeof router
+  }
+}
 
 const root = document.getElementById('root')
 if (!root) throw new Error('No root element found')
 
 createRoot(root).render(
   <StrictMode>
-    <div className="flex flex-col gap-y-4">
-      <Button>I am a button</Button>
-    </div>
-    <div className="text-yellow-300 dark:text-red-400 bg-white">
-      Hello World!
-    </div>
-    <div className="bg-primary">bg-primary</div>
-    <div className="bg-secondary">bg-primary</div>
-    <Button>Button</Button>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
