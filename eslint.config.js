@@ -137,7 +137,7 @@ export default defineConfig([
     plugins: {
       'check-file': checkFile,
     },
-    files: ['!./src/routes/__root.tsx'],
+    files: ['!./src/routes/(home)/__root.tsx'],
     rules: {
       // 파일 이름 규칙
       'check-file/filename-naming-convention': [
