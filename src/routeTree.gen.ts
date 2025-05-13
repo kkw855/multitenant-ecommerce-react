@@ -10,7 +10,7 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/(home)/__root.tsx'
+import { Route as rootRoute } from './routes/__root'
 import { Route as SignUpImport } from './routes/sign-up'
 import { Route as SignInImport } from './routes/sign-in'
 import { Route as PricingImport } from './routes/pricing'
@@ -18,6 +18,9 @@ import { Route as FeaturesImport } from './routes/features'
 import { Route as ContactImport } from './routes/contact'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as homeNavbarSidebarImport } from './routes/(home)/navbar-sidebar'
+import { Route as homeNavbarImport } from './routes/(home)/navbar'
+import { Route as homeFooterImport } from './routes/(home)/footer'
 
 // Create/Update Routes
 
@@ -60,6 +63,24 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const homeNavbarSidebarRoute = homeNavbarSidebarImport.update({
+  id: '/(home)/navbar-sidebar',
+  path: '/navbar-sidebar',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const homeNavbarRoute = homeNavbarImport.update({
+  id: '/(home)/navbar',
+  path: '/navbar',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const homeFooterRoute = homeFooterImport.update({
+  id: '/(home)/footer',
+  path: '/footer',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -116,6 +137,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpImport
       parentRoute: typeof rootRoute
     }
+    '/(home)/footer': {
+      id: '/(home)/footer'
+      path: '/footer'
+      fullPath: '/footer'
+      preLoaderRoute: typeof homeFooterImport
+      parentRoute: typeof rootRoute
+    }
+    '/(home)/navbar': {
+      id: '/(home)/navbar'
+      path: '/navbar'
+      fullPath: '/navbar'
+      preLoaderRoute: typeof homeNavbarImport
+      parentRoute: typeof rootRoute
+    }
+    '/(home)/navbar-sidebar': {
+      id: '/(home)/navbar-sidebar'
+      path: '/navbar-sidebar'
+      fullPath: '/navbar-sidebar'
+      preLoaderRoute: typeof homeNavbarSidebarImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -129,6 +171,9 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/footer': typeof homeFooterRoute
+  '/navbar': typeof homeNavbarRoute
+  '/navbar-sidebar': typeof homeNavbarSidebarRoute
 }
 
 export interface FileRoutesByTo {
@@ -139,6 +184,9 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/footer': typeof homeFooterRoute
+  '/navbar': typeof homeNavbarRoute
+  '/navbar-sidebar': typeof homeNavbarSidebarRoute
 }
 
 export interface FileRoutesById {
@@ -150,6 +198,9 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/(home)/footer': typeof homeFooterRoute
+  '/(home)/navbar': typeof homeNavbarRoute
+  '/(home)/navbar-sidebar': typeof homeNavbarSidebarRoute
 }
 
 export interface FileRouteTypes {
@@ -162,6 +213,9 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sign-in'
     | '/sign-up'
+    | '/footer'
+    | '/navbar'
+    | '/navbar-sidebar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,6 +225,9 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sign-in'
     | '/sign-up'
+    | '/footer'
+    | '/navbar'
+    | '/navbar-sidebar'
   id:
     | '__root__'
     | '/'
@@ -180,6 +237,9 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sign-in'
     | '/sign-up'
+    | '/(home)/footer'
+    | '/(home)/navbar'
+    | '/(home)/navbar-sidebar'
   fileRoutesById: FileRoutesById
 }
 
@@ -191,6 +251,9 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
+  homeFooterRoute: typeof homeFooterRoute
+  homeNavbarRoute: typeof homeNavbarRoute
+  homeNavbarSidebarRoute: typeof homeNavbarSidebarRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -201,6 +264,9 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  homeFooterRoute: homeFooterRoute,
+  homeNavbarRoute: homeNavbarRoute,
+  homeNavbarSidebarRoute: homeNavbarSidebarRoute,
 }
 
 export const routeTree = rootRoute
@@ -219,7 +285,10 @@ export const routeTree = rootRoute
         "/features",
         "/pricing",
         "/sign-in",
-        "/sign-up"
+        "/sign-up",
+        "/(home)/footer",
+        "/(home)/navbar",
+        "/(home)/navbar-sidebar"
       ]
     },
     "/": {
@@ -242,6 +311,15 @@ export const routeTree = rootRoute
     },
     "/sign-up": {
       "filePath": "sign-up.tsx"
+    },
+    "/(home)/footer": {
+      "filePath": "(home)/footer.tsx"
+    },
+    "/(home)/navbar": {
+      "filePath": "(home)/navbar.tsx"
+    },
+    "/(home)/navbar-sidebar": {
+      "filePath": "(home)/navbar-sidebar.tsx"
     }
   }
 }
