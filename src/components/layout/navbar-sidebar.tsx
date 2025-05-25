@@ -1,12 +1,13 @@
 import { Link } from '@tanstack/react-router'
 
-import { ScrollArea } from '@/components/ui/scroll-area.tsx'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/sheet.tsx'
+} from '@/components/ui/sheet'
 
 type Props = {
   items: { href: string; children: string }[]
@@ -20,6 +21,7 @@ export const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
       <SheetContent side="left" className="p-0 transition-none">
         <SheetHeader className="p-4 border-b">
           <SheetTitle>Menu</SheetTitle>
+          <SheetDescription />
         </SheetHeader>
         <ScrollArea className="flex flex-col h-full pb-2 overflow-y-auto">
           {items.map(({ href, children }) => (

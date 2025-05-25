@@ -78,14 +78,9 @@ export default defineConfig([
           zones: [
             // disables cross-feature imports:
             {
-              target: './src/features/goals',
+              target: './src/features/categories',
               from: './src/features',
-              except: ['./goals'],
-            },
-            {
-              target: './src/features/test',
-              from: './src/features',
-              except: ['./test'],
+              except: ['./categories'],
             },
 
             // enforce unidirectional codebase:

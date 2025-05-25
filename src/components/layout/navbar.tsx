@@ -2,9 +2,9 @@ import { Link, useLocation } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
 import { type ReactNode, useState } from 'react'
 
-import { Button } from '@/components/ui/button.tsx'
-import { cn } from '@/lib/utils.ts'
-import { NavbarSidebar } from '@/routes/(home)/navbar-sidebar.tsx'
+import { NavbarSidebar } from '@/components/layout/navbar-sidebar'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const NavbarItem = ({
   href,
