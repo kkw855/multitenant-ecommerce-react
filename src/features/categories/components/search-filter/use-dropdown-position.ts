@@ -28,14 +28,14 @@ export const useDropdownPosition = (
       left = 16
     }
 
-    console.log({
-      rect,
-      scrollX: window.scrollX,
-      scrollY: window.scrollY,
-      innerWidth: window.innerWidth,
-      top,
-      left,
-    })
+    // console.log({
+    //   rect,
+    //   scrollX: window.scrollX,
+    //   scrollY: window.scrollY,
+    //   innerWidth: window.innerWidth,
+    //   top,
+    //   left,
+    // })
 
     return { top, left }
   }
