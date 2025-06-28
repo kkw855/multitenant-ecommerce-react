@@ -3,9 +3,11 @@ export type Category = {
   name: string
   slug: string
   color: string
-  subcategories: {
-    categoryId: string
-    name: string
-    slug: string
-  }[]
+  subcategories: Subcategory[]
+}
+
+export type Subcategory = {
+  categoryId: string
+  name: string
+  slug: string
 }

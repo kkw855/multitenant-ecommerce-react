@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 
-import type { Category } from '@/types/api'
+import type { Category, Subcategory } from '@/types/api'
 
 type Props = {
   category: Category
@@ -9,9 +9,15 @@ type Props = {
 }
 
 export const SubcategoryMenu = ({ category, isOpen, position }: Props) => {
+  const navigate = useNavigate()
+
   if (!isOpen || !category.subcategories.length) return null
 
   const backgroundColor = category.color
+
+  const handleClick = (subcategory: Subcategory) => {
+    void navigate({ to: `${category.slug}/${subcategory.slug}` })
+  }
 
   return (
     <div
@@ -22,17 +28,18 @@ export const SubcategoryMenu = ({ category, isOpen, position }: Props) => {
       <div className="h-3 w-60" />
       <div
         style={{ backgroundColor }}
-        className="w-60 text-black rounded-md overflow-hidden border shodow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[2px] -translate-y-[2px]"
+        className="w-60 rounded-md overflow-hidden border shodow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[2px] -translate-y-[2px]"
       >
         <div>
           {category.subcategories.map((subcategory) => (
-            <Link
+            <button
               key={subcategory.slug}
-              to="/"
-              className="text-left p-4 hover:bg-black hover:text-white block underline font-medium"
+              type="button"
+              className="w-full text-left p-4 cursor-pointer text-black hover:bg-black hover:text-white block underline font-medium"
+              onClick={() => handleClick(subcategory)}
             >
               {subcategory.name}
-            </Link>
+            </button>
           ))}
         </div>
       </div>
