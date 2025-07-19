@@ -1,13 +1,13 @@
 import { Link } from '@tanstack/react-router'
 
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea } from '@/components/shadcn/ui/scroll-area'
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/sheet'
+} from '@/components/shadcn/ui/sheet'
 
 type Props = {
   items: { href: string; children: string }[]

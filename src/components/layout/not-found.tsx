@@ -1,7 +1,7 @@
 import { useCanGoBack, useRouter } from '@tanstack/react-router'
 
 import notFoundImage from '@/assets/images/page-not-found.png'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/shadcn/ui/button'
 
 export const NotFound = () => {
   const router = useRouter()
