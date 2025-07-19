@@ -1,11 +1,11 @@
 import { ListFilterIcon, SearchIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/shadcn/ui/button'
+import { Input } from '@/components/shadcn/ui/input'
 import { CategoriesSidebar } from '@/features/categories/components/search-filter/categories-sidebar'
 
 import type { Category } from '@/types/api'
-import { Button } from '@/components/ui/button'
 
 export const SearchInput = ({
   data,

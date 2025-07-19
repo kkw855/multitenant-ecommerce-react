@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/shadcn/ui/button'
 import { SubcategoryMenu } from '@/features/categories/components/search-filter/subcategory-menu'
 import { useDropdownPosition } from '@/features/categories/components/search-filter/use-dropdown-position'
 import { cn } from '@/lib/utils'

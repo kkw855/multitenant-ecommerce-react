@@ -5,6 +5,7 @@ import { type ReactNode, useState } from 'react'
 import { NavbarSidebar } from '@/components/layout/navbar-sidebar'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/features/auth/auth-provider'
 
 const NavbarItem = ({
   href,
@@ -34,19 +35,20 @@ const navbarItems = [
   { href: '/about', children: 'About' },
   { href: '/features', children: 'Features' },
   { href: '/pricing', children: 'Pricing' },
-  { href: '/Contact', children: 'Contact' },
+  { href: '/contact', children: 'Contact' },
+  { href: '/welcome', children: 'Welcome' },
 ]
 
 export const Navbar = () => {
+  const { accessToken } = useAuth()
+
   const location = useLocation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
     <nav className="h-20 flex border-b justify-between font-medium bg-white">
       <Link to="/" className="pl-6 content-center">
-        <span className={cn('text-5xl font-semibold font-poppins')}>
-          funroad
-        </span>
+        <span className="text-5xl font-semibold font-poppins">funroad</span>
       </Link>
 
       <NavbarSidebar
@@ -67,19 +69,33 @@ export const Navbar = () => {
         ))}
       </div>
 
+      {/* TODO: 로그인 상태일 때는 Logout 버튼 보여주기 */}
       <div className="hidden lg:flex">
-        <Button
-          asChild
-          className="border-l px-12 h-full rounded-none bg-white text-black hover:bg-pink-400 text-lg transition-colors"
-        >
-          <Link to="/sign-in">Log in</Link>
-        </Button>
-        <Button
-          asChild
-          className="border-l px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black text-lg transition-colors"
-        >
-          <Link to="/sign-up">Start selling</Link>
-        </Button>
+        {accessToken ? (
+          <Button
+            asChild
+            className="border-l px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black text-lg transition-colors"
+          >
+            <Link to="/sign-up">Dashboard</Link>
+          </Button>
+        ) : (
+          <>
+            <Button
+              asChild
+              className="border-l px-12 h-full rounded-none bg-white text-black hover:bg-pink-400 text-lg transition-colors"
+            >
+              {/* TODO: prefetch */}
+              <Link to="/sign-in">Log in</Link>
+            </Button>
+            <Button
+              asChild
+              className="border-l px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black text-lg transition-colors"
+            >
+              {/* TODO: prefetch */}
+              <Link to="/sign-up">Start selling</Link>
+            </Button>
+          </>
+        )}
       </div>
 
       <div className="lg:hidden">

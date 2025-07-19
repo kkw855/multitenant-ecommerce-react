@@ -8,241 +8,276 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as GridRouteImport } from './routes/grid'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
+import { Route as AuthRouteRouteImport } from './routes/_auth/route'
+import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ProtectedWelcomeRouteImport } from './routes/_protected/welcome'
+import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
+import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SignUpImport } from './routes/sign-up'
-import { Route as SignInImport } from './routes/sign-in'
-import { Route as PricingImport } from './routes/pricing'
-import { Route as FeaturesImport } from './routes/features'
-import { Route as ContactImport } from './routes/contact'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const SignUpRoute = SignUpImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const SignInRoute = SignInImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PricingRoute = PricingImport.update({
+const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const FeaturesRoute = FeaturesImport.update({
+const GridRoute = GridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
   id: '/features',
   path: '/features',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ContactRoute = ContactImport.update({
+const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AboutRoute = AboutImport.update({
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedWelcomeRoute = ProtectedWelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthSignInRoute = AuthSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/features': typeof FeaturesRoute
+  '/grid': typeof GridRoute
+  '/pricing': typeof PricingRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/welcome': typeof ProtectedWelcomeRoute
+  '/': typeof ProtectedIndexRoute
+}
+export interface FileRoutesByTo {
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/features': typeof FeaturesRoute
+  '/grid': typeof GridRoute
+  '/pricing': typeof PricingRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/welcome': typeof ProtectedWelcomeRoute
+  '/': typeof ProtectedIndexRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_auth': typeof AuthRouteRouteWithChildren
+  '/_protected': typeof ProtectedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/features': typeof FeaturesRoute
+  '/grid': typeof GridRoute
+  '/pricing': typeof PricingRoute
+  '/_auth/sign-in': typeof AuthSignInRoute
+  '/_auth/sign-up': typeof AuthSignUpRoute
+  '/_protected/welcome': typeof ProtectedWelcomeRoute
+  '/_protected/': typeof ProtectedIndexRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/about'
+    | '/contact'
+    | '/features'
+    | '/grid'
+    | '/pricing'
+    | '/sign-in'
+    | '/sign-up'
+    | '/welcome'
+    | '/'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/about'
+    | '/contact'
+    | '/features'
+    | '/grid'
+    | '/pricing'
+    | '/sign-in'
+    | '/sign-up'
+    | '/welcome'
+    | '/'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/_protected'
+    | '/about'
+    | '/contact'
+    | '/features'
+    | '/grid'
+    | '/pricing'
+    | '/_auth/sign-in'
+    | '/_auth/sign-up'
+    | '/_protected/welcome'
+    | '/_protected/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  FeaturesRoute: typeof FeaturesRoute
+  GridRoute: typeof GridRoute
+  PricingRoute: typeof PricingRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactImport
-      parentRoute: typeof rootRoute
+    '/grid': {
+      id: '/grid'
+      path: '/grid'
+      fullPath: '/grid'
+      preLoaderRoute: typeof GridRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/features': {
       id: '/features'
       path: '/features'
       fullPath: '/features'
-      preLoaderRoute: typeof FeaturesImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingImport
-      parentRoute: typeof rootRoute
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/sign-in': {
-      id: '/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInImport
-      parentRoute: typeof rootRoute
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/sign-up': {
-      id: '/sign-up'
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_protected/': {
+      id: '/_protected/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof ProtectedIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/welcome': {
+      id: '/_protected/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof ProtectedWelcomeRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_auth/sign-up': {
+      id: '/_auth/sign-up'
       path: '/sign-up'
       fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/_auth/sign-in': {
+      id: '/_auth/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof AuthSignInRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
   }
 }
 
-// Create and export the route tree
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
+interface AuthRouteRouteChildren {
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthSignInRoute: AuthSignInRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
 }
 
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
+
+interface ProtectedRouteRouteChildren {
+  ProtectedWelcomeRoute: typeof ProtectedWelcomeRoute
+  ProtectedIndexRoute: typeof ProtectedIndexRoute
 }
 
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/features'
-    | '/pricing'
-    | '/sign-in'
-    | '/sign-up'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/features'
-    | '/pricing'
-    | '/sign-in'
-    | '/sign-up'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/features'
-    | '/pricing'
-    | '/sign-in'
-    | '/sign-up'
-  fileRoutesById: FileRoutesById
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedWelcomeRoute: ProtectedWelcomeRoute,
+  ProtectedIndexRoute: ProtectedIndexRoute,
 }
 
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  ContactRoute: typeof ContactRoute
-  FeaturesRoute: typeof FeaturesRoute
-  PricingRoute: typeof PricingRoute
-  SignInRoute: typeof SignInRoute
-  SignUpRoute: typeof SignUpRoute
-}
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   FeaturesRoute: FeaturesRoute,
+  GridRoute: GridRoute,
   PricingRoute: PricingRoute,
-  SignInRoute: SignInRoute,
-  SignUpRoute: SignUpRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/about",
-        "/contact",
-        "/features",
-        "/pricing",
-        "/sign-in",
-        "/sign-up"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/contact": {
-      "filePath": "contact.tsx"
-    },
-    "/features": {
-      "filePath": "features.tsx"
-    },
-    "/pricing": {
-      "filePath": "pricing.tsx"
-    },
-    "/sign-in": {
-      "filePath": "sign-in.tsx"
-    },
-    "/sign-up": {
-      "filePath": "sign-up.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

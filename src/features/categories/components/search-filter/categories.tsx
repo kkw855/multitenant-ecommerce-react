@@ -1,7 +1,7 @@
 import { ListFilterIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/shadcn/ui/button'
 import { CategoriesSidebar } from '@/features/categories/components/search-filter/categories-sidebar'
 import { CategoryDropdown } from '@/features/categories/components/search-filter/category-dropdown'
 import { cn } from '@/lib/utils'
