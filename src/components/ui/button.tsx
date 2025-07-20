@@ -52,9 +52,11 @@ export const Button = ({
       disabled={isLoading}
       {...props}
     >
-      <span className="flex items-center justify-center">
-        {isLoading && <LoaderCircle className="animate-spin mr-2" />}
-        <span>{children}</span>
+      <span>
+        {isLoading && (
+          <LoaderCircle className="animate-spin mr-2 inline-flex" />
+        )}
+        {children}
       </span>
     </Comp>
   )

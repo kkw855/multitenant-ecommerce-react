@@ -2,10 +2,10 @@ import { Link, useLocation } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
 import { type ReactNode, useState } from 'react'
 
-import { NavbarSidebar } from '@/components/layout/navbar-sidebar'
+import { useAuth } from '@/components/layouts/auth-provider'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useAuth } from '@/features/auth/auth-provider'
+import { NavbarSidebar } from '@/routes/_protected/(layout)/navbar-sidebar'
 
 const NavbarItem = ({
   href,
@@ -81,15 +81,15 @@ export const Navbar = () => {
         ) : (
           <>
             <Button
-              asChild
               className="border-l px-12 h-full rounded-none bg-white text-black hover:bg-pink-400 text-lg transition-colors"
+              asChild
             >
               {/* TODO: prefetch */}
               <Link to="/sign-in">Log in</Link>
             </Button>
             <Button
-              asChild
               className="border-l px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black text-lg transition-colors"
+              asChild
             >
               {/* TODO: prefetch */}
               <Link to="/sign-up">Start selling</Link>

@@ -1,6 +1,8 @@
-import { ListFilterIcon, SearchIcon } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import { BookmarkCheckIcon, ListFilterIcon, SearchIcon } from 'lucide-react'
 import { useState } from 'react'
 
+import { useAuth } from '@/components/layouts/auth-provider'
 import { Button } from '@/components/shadcn/ui/button'
 import { Input } from '@/components/shadcn/ui/input'
 import { CategoriesSidebar } from '@/features/categories/components/search-filter/categories-sidebar'
@@ -14,6 +16,8 @@ export const SearchInput = ({
   data: Category[]
   disabled?: boolean
 }) => {
+  const { user } = useAuth()
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
@@ -31,7 +35,6 @@ export const SearchInput = ({
           disabled={disabled}
         />
       </div>
-      {/* TODO: Add categories view all button */}
       <Button
         variant="elevated"
         className="size-12 shrink-0 flex lg:hidden"
@@ -39,7 +42,13 @@ export const SearchInput = ({
       >
         <ListFilterIcon />
       </Button>
-      {/* TODO: Add library button */}
+      {user && (
+        <Button variant="elevated" asChild>
+          <Link to="/library">
+            <BookmarkCheckIcon /> Library
+          </Link>
+        </Button>
+      )}
     </div>
   )
 }
