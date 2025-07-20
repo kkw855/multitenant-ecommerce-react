@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/form/input'
-import { useAuth } from '@/features/auth/auth-provider'
+import { useAuth } from '@/components/layouts/auth-provider'
 import { type Login, LoginSchema } from '@/features/login/api/login'
 
 export const Route = createFileRoute('/_auth/sign-in')({
@@ -42,7 +42,7 @@ function SignIn() {
             <Link to="/" className="text-2xl font-semibold font-poppins">
               funroad
             </Link>
-            <Button variant="ghost" className="underline" asChild>
+            <Button type="button" variant="ghost" className="underline" asChild>
               <Link to="/sign-up">Sign up</Link>
             </Button>
           </div>

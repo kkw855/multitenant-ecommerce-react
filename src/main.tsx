@@ -4,7 +4,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Toaster } from 'sonner'
 
-import { AuthProvider, useAuth } from '@/features/auth/auth-provider'
+import { AuthProvider, useAuth } from '@/components/layouts/auth-provider'
 import { queryConfig } from '@/lib/react-query'
 import { routeTree } from '@/routeTree.gen'
 

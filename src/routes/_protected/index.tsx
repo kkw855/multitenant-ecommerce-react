@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
-import { useAuth } from '@/features/auth/auth-provider'
+import { useAuth } from '@/components/layouts/auth-provider'
 import { getCategoriesQueryOptions } from '@/features/categories/api/get-categories'
 import { SearchFilter } from '@/features/categories/components/search-filter'
 
@@ -27,7 +27,7 @@ function Home() {
   const { user } = useAuth()
 
   return (
-    <div>
+    <div className="w-full">
       <SearchFilter />
       <div>{JSON.stringify(user)}</div>
     </div>

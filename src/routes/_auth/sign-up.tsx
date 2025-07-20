@@ -2,11 +2,11 @@ import { effectTsResolver } from '@hookform/resolvers/effect-ts'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useForm, useWatch } from 'react-hook-form'
 
+import { useAuth } from '@/components/layouts/auth-provider'
 import { Button } from '@/components/ui/button'
 import { Error } from '@/components/ui/form/error'
 import { Input } from '@/components/ui/form/input'
-import { useAuth } from '@/features/auth/auth-provider'
-import { SignUpSchema, type SignUp } from '@/features/sign-up/api/sign-up'
+import { SignUpSchema, type SignUp } from '@/lib/auth'
 
 export const Route = createFileRoute('/_auth/sign-up')({
   component: SignUp,
@@ -69,7 +69,7 @@ function SignUp() {
             <Link to="/" className="text-2xl font-semibold font-poppins">
               funroad
             </Link>
-            <Button variant="ghost" className="underline" asChild>
+            <Button type="button" variant="ghost" className="underline" asChild>
               <Link to="/sign-in">Sign in</Link>
             </Button>
           </div>

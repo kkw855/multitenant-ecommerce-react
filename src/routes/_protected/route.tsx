@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
-import { Footer } from '@/components/layout/footer'
-import { Navbar } from '@/components/layout/navbar'
+import { Footer } from '@/routes/_protected/(layout)/footer'
+import { Navbar } from '@/routes/_protected/(layout)/navbar'
 
 export const Route = createFileRoute('/_protected')({
   beforeLoad: ({ context, location }) => {
