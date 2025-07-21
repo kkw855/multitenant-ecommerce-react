@@ -13,13 +13,16 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as GridRouteImport } from './routes/grid'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BreadcrumbsRouteImport } from './routes/breadcrumbs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as ProtectedWelcomeRouteImport } from './routes/_protected/welcome'
+import { Route as ProtectedCategoryRouteImport } from './routes/_protected/$category'
 import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
+import { Route as ProtectedCategorySubcategoryRouteImport } from './routes/_protected/$category.$subcategory'
 
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
@@ -39,6 +42,11 @@ const FeaturesRoute = FeaturesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BreadcrumbsRoute = BreadcrumbsRouteImport.update({
+  id: '/breadcrumbs',
+  path: '/breadcrumbs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -64,6 +72,11 @@ const ProtectedWelcomeRoute = ProtectedWelcomeRouteImport.update({
   path: '/welcome',
   getParentRoute: () => ProtectedRouteRoute,
 } as any)
+const ProtectedCategoryRoute = ProtectedCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -74,85 +87,110 @@ const AuthSignInRoute = AuthSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const ProtectedCategorySubcategoryRoute =
+  ProtectedCategorySubcategoryRouteImport.update({
+    id: '/$subcategory',
+    path: '/$subcategory',
+    getParentRoute: () => ProtectedCategoryRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/grid': typeof GridRoute
   '/pricing': typeof PricingRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/$category': typeof ProtectedCategoryRouteWithChildren
   '/welcome': typeof ProtectedWelcomeRoute
   '/': typeof ProtectedIndexRoute
+  '/$category/$subcategory': typeof ProtectedCategorySubcategoryRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/grid': typeof GridRoute
   '/pricing': typeof PricingRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/$category': typeof ProtectedCategoryRouteWithChildren
   '/welcome': typeof ProtectedWelcomeRoute
   '/': typeof ProtectedIndexRoute
+  '/$category/$subcategory': typeof ProtectedCategorySubcategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_protected': typeof ProtectedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/grid': typeof GridRoute
   '/pricing': typeof PricingRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
+  '/_protected/$category': typeof ProtectedCategoryRouteWithChildren
   '/_protected/welcome': typeof ProtectedWelcomeRoute
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/$category/$subcategory': typeof ProtectedCategorySubcategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/about'
+    | '/breadcrumbs'
     | '/contact'
     | '/features'
     | '/grid'
     | '/pricing'
     | '/sign-in'
     | '/sign-up'
+    | '/$category'
     | '/welcome'
     | '/'
+    | '/$category/$subcategory'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
+    | '/breadcrumbs'
     | '/contact'
     | '/features'
     | '/grid'
     | '/pricing'
     | '/sign-in'
     | '/sign-up'
+    | '/$category'
     | '/welcome'
     | '/'
+    | '/$category/$subcategory'
   id:
     | '__root__'
     | '/_auth'
     | '/_protected'
     | '/about'
+    | '/breadcrumbs'
     | '/contact'
     | '/features'
     | '/grid'
     | '/pricing'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
+    | '/_protected/$category'
     | '/_protected/welcome'
     | '/_protected/'
+    | '/_protected/$category/$subcategory'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  BreadcrumbsRoute: typeof BreadcrumbsRoute
   ContactRoute: typeof ContactRoute
   FeaturesRoute: typeof FeaturesRoute
   GridRoute: typeof GridRoute
@@ -187,6 +225,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/breadcrumbs': {
+      id: '/breadcrumbs'
+      path: '/breadcrumbs'
+      fullPath: '/breadcrumbs'
+      preLoaderRoute: typeof BreadcrumbsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -224,6 +269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedWelcomeRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/$category': {
+      id: '/_protected/$category'
+      path: '/$category'
+      fullPath: '/$category'
+      preLoaderRoute: typeof ProtectedCategoryRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_auth/sign-up': {
       id: '/_auth/sign-up'
       path: '/sign-up'
@@ -237,6 +289,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-in'
       preLoaderRoute: typeof AuthSignInRouteImport
       parentRoute: typeof AuthRouteRoute
+    }
+    '/_protected/$category/$subcategory': {
+      id: '/_protected/$category/$subcategory'
+      path: '/$subcategory'
+      fullPath: '/$category/$subcategory'
+      preLoaderRoute: typeof ProtectedCategorySubcategoryRouteImport
+      parentRoute: typeof ProtectedCategoryRoute
     }
   }
 }
@@ -255,12 +314,25 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
+interface ProtectedCategoryRouteChildren {
+  ProtectedCategorySubcategoryRoute: typeof ProtectedCategorySubcategoryRoute
+}
+
+const ProtectedCategoryRouteChildren: ProtectedCategoryRouteChildren = {
+  ProtectedCategorySubcategoryRoute: ProtectedCategorySubcategoryRoute,
+}
+
+const ProtectedCategoryRouteWithChildren =
+  ProtectedCategoryRoute._addFileChildren(ProtectedCategoryRouteChildren)
+
 interface ProtectedRouteRouteChildren {
+  ProtectedCategoryRoute: typeof ProtectedCategoryRouteWithChildren
   ProtectedWelcomeRoute: typeof ProtectedWelcomeRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
 }
 
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedCategoryRoute: ProtectedCategoryRouteWithChildren,
   ProtectedWelcomeRoute: ProtectedWelcomeRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
 }
@@ -273,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  BreadcrumbsRoute: BreadcrumbsRoute,
   ContactRoute: ContactRoute,
   FeaturesRoute: FeaturesRoute,
   GridRoute: GridRoute,

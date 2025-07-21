@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import type { ComponentProps } from 'react'
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md cursor-pointer shrink-0 [&_svg:not([class*='size-'])]:size-4 disabled:opacity-50 disabled:pointer-events-none",
+  "inline-flex items-center justify-center rounded-md cursor-pointer shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg]:inline disabled:opacity-50 disabled:pointer-events-none",
   {
     variants: {
       variant: {

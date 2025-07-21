@@ -1,7 +1,8 @@
+import { useParams } from '@tanstack/react-router'
 import { ListFilterIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
-import { Button } from '@/components/shadcn/ui/button'
+import { Button } from '@/components/ui/button'
 import { CategoriesSidebar } from '@/features/categories/components/search-filter/categories-sidebar'
 import { CategoryDropdown } from '@/features/categories/components/search-filter/category-dropdown'
 import { cn } from '@/lib/utils'
@@ -9,6 +10,8 @@ import { cn } from '@/lib/utils'
 import type { Category } from '@/types/api'
 
 export const Categories = ({ data }: { data: Category[] }) => {
+  const params = useParams({ strict: false })
+
   const containerRef = useRef<HTMLDivElement>(null)
   const measureRef = useRef<HTMLDivElement>(null)
   const viewAllRef = useRef<HTMLDivElement>(null)
@@ -17,7 +20,7 @@ export const Categories = ({ data }: { data: Category[] }) => {
   const [isAnyHovered, setIsAnyHovered] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  const activeCategory = 'all'
+  const activeCategory = params?.category ?? 'all'
   const activeCategoryIndex = data.findIndex(
     (cat) => activeCategory === cat.slug,
   )
@@ -94,6 +97,7 @@ export const Categories = ({ data }: { data: Category[] }) => {
         className="flex items-center flex-nowrap"
         onMouseEnter={() => setIsAnyHovered(true)}
         onMouseLeave={() => setIsAnyHovered(false)}
+        onClick={() => setIsAnyHovered(false)}
       >
         {data.slice(0, visibleCount).map((category) => (
           <CategoryDropdown

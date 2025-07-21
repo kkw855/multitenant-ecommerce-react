@@ -1,6 +1,7 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useRef, useState } from 'react'
 
-import { Button } from '@/components/shadcn/ui/button'
+import { Button } from '@/components/ui/button'
 import { SubcategoryMenu } from '@/features/categories/components/search-filter/subcategory-menu'
 import { useDropdownPosition } from '@/features/categories/components/search-filter/use-dropdown-position'
 import { cn } from '@/lib/utils'
@@ -18,6 +19,8 @@ export const CategoryDropdown = ({
   isActive,
   isNavigationHovered,
 }: Props) => {
+  const navigate = useNavigate()
+
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const { getDropdownPosition } = useDropdownPosition(dropdownRef)
@@ -32,14 +35,11 @@ export const CategoryDropdown = ({
     setIsOpen(false)
   }
 
-  const dropdownPosition = getDropdownPosition()
-
-  // TODO: Potentially improve mobile
-  const toggleDropdown = () => {
-    if (category.subcategories.length) {
-      setIsOpen(!isOpen)
-    }
+  const handleClick = (category: Category) => {
+    void navigate({ to: '/$category', params: { category: category.slug } })
   }
+
+  const dropdownPosition = getDropdownPosition()
 
   return (
     <div
@@ -49,8 +49,6 @@ export const CategoryDropdown = ({
       ref={dropdownRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={toggleDropdown}
-      // onKeyDown={toggleDropdown}
     >
       <div className="relative">
         <Button
@@ -61,6 +59,7 @@ export const CategoryDropdown = ({
             isOpen &&
               'bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[4px] -translate-y-[4px]',
           )}
+          onClick={() => handleClick(category)}
         >
           <span>{category.name}</span>
         </Button>
