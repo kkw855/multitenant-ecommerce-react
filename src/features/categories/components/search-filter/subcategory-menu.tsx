@@ -16,7 +16,10 @@ export const SubcategoryMenu = ({ category, isOpen, position }: Props) => {
   const backgroundColor = category.color
 
   const handleClick = (subcategory: Subcategory) => {
-    void navigate({ to: `${category.slug}/${subcategory.slug}` })
+    void navigate({
+      to: '/$category/$subcategory',
+      params: { category: category.slug, subcategory: subcategory.slug },
+    })
   }
 
   return (

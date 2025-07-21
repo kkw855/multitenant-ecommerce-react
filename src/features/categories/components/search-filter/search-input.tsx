@@ -3,8 +3,8 @@ import { BookmarkCheckIcon, ListFilterIcon, SearchIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { useAuth } from '@/components/layouts/auth-provider'
-import { Button } from '@/components/shadcn/ui/button'
 import { Input } from '@/components/shadcn/ui/input'
+import { Button } from '@/components/ui/button'
 import { CategoriesSidebar } from '@/features/categories/components/search-filter/categories-sidebar'
 
 import type { Category } from '@/types/api'

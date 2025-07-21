@@ -2,7 +2,6 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useAuth } from '@/components/layouts/auth-provider'
 import { getCategoriesQueryOptions } from '@/features/categories/api/get-categories'
-import { SearchFilter } from '@/features/categories/components/search-filter'
 
 export const Route = createFileRoute('/_protected/')({
   beforeLoad: ({ context, location }) => {
@@ -28,7 +27,6 @@ function Home() {
 
   return (
     <div className="w-full">
-      <SearchFilter />
       <div>{JSON.stringify(user)}</div>
     </div>
   )

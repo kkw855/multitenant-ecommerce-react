@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/git,macos,dotenv,windows,intellij+all,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,macos,dotenv,windows,intellij+all,react
 
+### Tanstack Router ###
+.tanstack/
+
 ### dotenv ###
 .env
 

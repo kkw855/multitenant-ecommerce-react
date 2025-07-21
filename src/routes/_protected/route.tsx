@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
+import { SearchFilter } from '@/features/categories/components/search-filter'
 import { Footer } from '@/routes/_protected/(layout)/footer'
 import { Navbar } from '@/routes/_protected/(layout)/navbar'
 
@@ -22,6 +23,7 @@ function ProtectedLayout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <SearchFilter />
       <div className="flex-1 bg-[#F4F4F0] flex">
         <Outlet />
       </div>

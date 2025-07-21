@@ -2,17 +2,17 @@ import { effectTsResolver } from '@hookform/resolvers/effect-ts'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 
+import { useAuth } from '@/components/layouts/auth-provider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/form/input'
-import { useAuth } from '@/components/layouts/auth-provider'
-import { type Login, LoginSchema } from '@/features/login/api/login'
+import { type Login, LoginSchema } from '@/lib/auth'
 
 export const Route = createFileRoute('/_auth/sign-in')({
   component: SignIn,
 })
 
 function SignIn() {
-  const { login } = useAuth()
+  const { signIn } = useAuth()
 
   const navigate = useNavigate()
 
@@ -29,7 +29,7 @@ function SignIn() {
     mode: 'all',
   })
   const onSubmit = handleSubmit(async (data) => {
-    const response = await login({ data })
+    const response = await signIn({ data })
     console.log('onSubmit', response)
     await navigate({ to: '/' })
   })
